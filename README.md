@@ -1,59 +1,59 @@
-# ClimaApp
+# ClimaApp - Consumo de API REST con HttpHeaders
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.19.
+Aplicación desarrollada en Angular que consulta el clima actual de una ciudad utilizando la API de **WeatherAPI**, autenticada mediante `HttpHeaders`.
 
-## Development server
+##  Descripción del proyecto
 
-To start a local development server, run:
+Esta actividad consiste en desarrollar una aplicación Angular que consuma una API REST protegida, implementando la autenticación de solicitudes HTTP mediante `HttpClient` y `HttpHeaders`.
 
+##  Tecnologías utilizadas
+
+- Angular 21
+- TypeScript
+- HttpClient / HttpHeaders
+- WeatherAPI (https://www.weatherapi.com/)
+
+##  Cómo ejecutar el proyecto
+
+1. Clonar el repositorio:
+```bash
+git clone https://github.com/TU_USUARIO/clima-app-weatherapi.git
+cd clima-app
+```
+
+2. Instalar las dependencias:
+```bash
+npm install
+```
+
+3. Levantar el servidor de desarrollo:
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+4. Abrir el navegador en: http://localhost:4200
 
-## Code scaffolding
+5. Configuración de la API Key
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+El servicio utiliza una API Key de WeatherAPI.
 
-```bash
-ng generate component component-name
-```
+6. Estructura del proyecto
+src/app/
+├── services/
+│   └── weather.ts       → Servicio que consume la API con HttpHeaders
+└── components/
+└── weather/
+├── weather.ts    → Lógica del componente
+├── weather.html  → Interfaz de usuario
+└── weather.css   → Estilos
+7. Funcionalidad
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- El usuario ingresa el nombre de una ciudad (ej. Lima, Cusco, Arequipa, Iquitos).
+- Al presionar **Buscar**, la aplicación consulta la API y muestra:
+  - Nombre de la ciudad y país
+  - Temperatura actual (°C)
+  - Estado del clima
+  - Humedad
+  - Velocidad del viento
+  - Ícono del clima
+  
