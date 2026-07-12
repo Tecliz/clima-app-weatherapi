@@ -1,0 +1,23 @@
+<div class="weather-container">
+  <h2>Consulta del Clima</h2>
+
+  <div class="search-box">
+    <input 
+      type="text" 
+      [(ngModel)]="city" 
+      placeholder="Ingresa una ciudad (Lima, Cusco, Arequipa...)"
+    />
+    <button (click)="buscarClima()">Buscar</button>
+  </div>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <div *ngIf="weatherData" class="weather-card">
+    <h3>{{ weatherData.location.name }}, {{ weatherData.location.country }}</h3>
+    <img [src]="'https:' + weatherData.current.condition.icon" alt="icono clima" />
+    <p><strong>Temperatura:</strong> {{ weatherData.current.temp_c }} °C</p>
+    <p><strong>Estado:</strong> {{ weatherData.current.condition.text }}</p>
+    <p><strong>Humedad:</strong> {{ weatherData.current.humidity }}%</p>
+    <p><strong>Viento:</strong> {{ weatherData.current.wind_kph }} km/h</p>
+  </div>
+</div>
