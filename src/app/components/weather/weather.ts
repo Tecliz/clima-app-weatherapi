@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Weather as WeatherService } from '../../services/weather';
 
 @Component({
@@ -30,10 +31,33 @@ export class WeatherComponent {
         this.weatherData = data;
         console.log('Respuesta de la API:', data);
       },
-      error: (err) => {
-        this.errorMessage = 'No se pudo obtener el clima. Verifica la ciudad o tu API Key.';
+      error: (error: HttpErrorResponse) => {
+        console.log('Error recibido en el componente');
+        console.log(error);
         this.weatherData = null;
-        console.error(err);
+
+        switch (error.status) {
+          case 400:
+            this.errorMessage = 'Solicitud incorrecta. Verifica el nombre de la ciudad';
+            break;
+          case 401:
+            this.errorMessage = 'La API key no es válida';
+            break;
+          case 403:
+            this.errorMessage = 'Acceso denegado a la API';
+            break;
+          case 404:
+            this.errorMessage = 'No se encontró la ciudad ingresada';
+            break;
+          case 429:
+            this.errorMessage = 'Se excedió la cantidad de peticiones permitidas';
+            break;
+          case 500:
+            this.errorMessage = 'Error interno del servidor';
+            break;
+          default:
+            this.errorMessage = 'Ocurrió un error inesperado';
+        }
       }
     });
   }
