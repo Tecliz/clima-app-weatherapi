@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +19,6 @@ export class Weather {
 
     const url = `${this.apiUrl}?key=${this.apiKey}&q=${city}`;
 
-    return this.http.get(url, { headers }).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log('Error recibido en el servicio');
-        console.log(error);
-        return throwError(() => error);
-      })
-    );
+    return this.http.get(url, { headers });
   }
 }

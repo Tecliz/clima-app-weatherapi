@@ -13,6 +13,18 @@ Esta actividad consiste en desarrollar una aplicación Angular que consuma una A
 - HttpClient / HttpHeaders
 - WeatherAPI (https://www.weatherapi.com/)
 
+## Manejo de errores
+
+La aplicación centraliza el manejo de errores HTTP mediante un **Interceptor funcional** (`error-interceptor.ts`), en lugar de usar `catchError()` en cada servicio.
+
+- Ubicación: `src/app/interceptors/error-interceptor.ts`
+- Registrado en: `src/app/app.config.ts` con `withInterceptors([errorInterceptor])`
+- Códigos de error gestionados:
+  - `401` → No autorizado
+  - `404` → Recurso no encontrado
+  - `500` → Error interno del servidor
+  - Otros códigos → Mensaje genérico
+
 ##  Cómo ejecutar el proyecto
 
 1. Clonar el repositorio:
@@ -37,15 +49,20 @@ ng serve
 
 El servicio utiliza una API Key de WeatherAPI.
 
-6. Estructura del proyecto
+6. ## Estructura del proyecto
+
+
 src/app/
+├── interceptors/
+│   └── error-interceptor.ts   → Manejo global de errores HTTP
 ├── services/
-│   └── weather.ts       → Servicio que consume la API con HttpHeaders
+│   └── weather.ts              → Servicio que consume la API con HttpHeaders
 └── components/
-└── weather/
-├── weather.ts    → Lógica del componente
-├── weather.html  → Interfaz de usuario
-└── weather.css   → Estilos
+    └── weather/
+        ├── weather.ts          → Lógica del componente
+        ├── weather.html        → Interfaz de usuario
+        └── weather.css         → Estilos
+
 7. Funcionalidad
 
 - El usuario ingresa el nombre de una ciudad (ej. Lima, Cusco, Arequipa, Iquitos).
